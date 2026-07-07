@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大鹏数据大屏 · DaPengScreen2</title>
+  <link rel="stylesheet" href="style-red.css" />
+</head>
+<body>
+  <div id="screen">
+    <!-- ===== Header ===== -->
+    <header class="header">
+      <div class="h-left">
+        <div id="date" class="h-date">2026-01-01 星期一</div>
+        <div id="clock" class="h-clock">00:00:00</div>
+      </div>
+      <div class="h-center">
+        <h1 class="h-title">大鹏数据大屏</h1>
+        <div class="h-sub">DaPengScreen2 · Real-time Data View</div>
+        <div class="h-line"></div>
+      </div>
+      <div class="h-right">
+        <span class="badge ok">● 系统在线</span>
+        <span class="badge">☀ 晴 26°C</span>
+        <span class="badge" id="refreshTime">刷新 00:00:00</span>
+      </div>
+    </header>
+
+    <!-- ===== Left Column ===== -->
+    <section class="col col-left">
+      <div class="panel kpi-panel">
+        <div class="panel-h"><i class="bar"></i>核心指标</div>
+        <div class="panel-b">
+          <div class="kpi-grid" id="kpiGrid"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><i class="bar"></i>实时销量趋势</div>
+        <div class="panel-b"><div id="trendChart" class="chart"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><i class="bar"></i>品类销售占比</div>
+        <div class="panel-b"><div id="categoryChart" class="chart"></div></div>
+      </div>
+    </section>
+
+    <!-- ===== Center Column ===== -->
+    <section class="col col-center">
+      <div class="panel map-panel">
+        <div class="panel-h"><i class="bar"></i>全国销售分布</div>
+        <div class="panel-b"><div id="mapChart" class="chart"></div></div>
+      </div>
+      <div class="panel rank-panel">
+        <div class="panel-h"><i class="bar"></i>城市销量排行榜 TOP10</div>
+        <div class="panel-b">
+          <div class="rank-scroll"><div class="rank-track" id="rankTrack"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Right Column ===== -->
+    <section class="col col-right">
+      <div class="panel">
+        <div class="panel-h"><i class="bar"></i>渠道分布</div>
+        <div class="panel-b"><div id="channelChart" class="chart"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><i class="bar"></i>设备与转化</div>
+        <div class="panel-b gauge-b">
+          <div id="gauge1" class="chart half"></div>
+          <div id="gauge2" class="chart half"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><i class="bar"></i>实时动态</div>
+        <div class="panel-b"><div id="logList" class="log-list"></div></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="main-red.js" defer></script>
+</body>
+</html>
