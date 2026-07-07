@@ -1,0 +1,202 @@
+:root {
+  --blood: #c0102a;
+  --blood2: #7a0010;
+  --toxic: #6bff5b;   /* 毒性荧光绿 */
+  --ghost: #8a2be2;   /* 幽灵紫 */
+  --bone: #cfcaba;    /* 骨白 */
+  --txt: #d6c9c9;
+  --panel-bg: rgba(18, 4, 4, 0.62);
+  --panel-bd: rgba(192, 16, 42, 0.38);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050103;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: var(--txt);
+}
+
+/* ===== Screen (1920x1080, scaled) ===== */
+#screen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: center center;
+  background:
+    radial-gradient(1100px 700px at 50% -10%, rgba(192, 16, 42, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 12% 110%, rgba(138, 43, 226, 0.12), transparent 60%),
+    radial-gradient(900px 600px at 88% 110%, rgba(107, 255, 91, 0.08), transparent 60%),
+    linear-gradient(160deg, #0a0203 0%, #1a0306 55%, #050103 100%);
+  background-color: #070103;
+  overflow: hidden;
+  animation: breathe 7s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { box-shadow: inset 0 0 220px rgba(122, 0, 16, 0.35); }
+  50% { box-shadow: inset 0 0 320px rgba(122, 0, 16, 0.55); }
+}
+#screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(192, 16, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(192, 16, 42, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+#screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.65) 100%);
+  pointer-events: none;
+}
+
+/* ===== Header ===== */
+.header {
+  position: relative;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid rgba(192, 16, 42, 0.35);
+  background: linear-gradient(180deg, rgba(192, 16, 42, 0.10), transparent);
+}
+.h-left { width: 360px; }
+.h-date { font-size: 16px; color: #b58a8a; letter-spacing: 1px; }
+.h-clock {
+  font-size: 30px; font-weight: 700; color: var(--blood);
+  font-family: "Consolas", "DIN", monospace; letter-spacing: 2px;
+  text-shadow: 0 0 14px rgba(192, 16, 42, 0.8);
+  animation: flick 4s infinite;
+}
+@keyframes flick {
+  0%, 19%, 21%, 55%, 57%, 100% { opacity: 1; }
+  20%, 56% { opacity: 0.35; }
+}
+.h-center { text-align: center; position: relative; }
+.h-title {
+  font-size: 38px; font-weight: 800; letter-spacing: 10px;
+  background: linear-gradient(90deg, #8a2be2, #c0102a, #8a2be2);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 0 26px rgba(192, 16, 42, 0.6);
+  animation: flick 6s infinite;
+}
+.h-sub { font-size: 13px; color: #b58a8a; letter-spacing: 3px; margin-top: 2px; }
+.h-line {
+  width: 460px; height: 2px; margin: 6px auto 0;
+  background: linear-gradient(90deg, transparent, var(--blood), transparent);
+}
+.h-right { width: 360px; display: flex; gap: 10px; justify-content: flex-end; }
+.badge {
+  font-size: 13px; padding: 5px 10px; border-radius: 4px;
+  border: 1px solid rgba(192, 16, 42, 0.35);
+  background: rgba(192, 16, 42, 0.08); color: #e7b6b6; white-space: nowrap;
+}
+.badge.ok { color: var(--toxic); border-color: rgba(107, 255, 91, 0.4); }
+
+/* ===== Columns ===== */
+.col { position: absolute; top: 100px; bottom: 20px; display: flex; flex-direction: column; gap: 16px; }
+.col-left { left: 20px; width: 460px; }
+.col-center { left: 500px; width: 900px; }
+.col-right { left: 1420px; width: 480px; }
+
+/* ===== Panel ===== */
+.panel {
+  position: relative;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-bd);
+  box-shadow: inset 0 0 24px rgba(192, 16, 42, 0.08), 0 0 14px rgba(122, 0, 16, 0.18);
+  display: flex; flex-direction: column;
+  backdrop-filter: blur(2px);
+}
+.panel::before, .panel::after {
+  content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none;
+}
+.panel::before { top: -1px; left: -1px; border-top: 2px solid var(--blood); border-left: 2px solid var(--blood); }
+.panel::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--blood); border-right: 2px solid var(--blood); }
+.col-left .panel:nth-child(1) { flex: 0 0 196px; }
+.col-left .panel:nth-child(2) { flex: 1 1 auto; }
+.col-left .panel:nth-child(3) { flex: 1 1 auto; }
+.col-center .panel:nth-child(1) { flex: 1 1 620px; }
+.col-center .panel:nth-child(2) { flex: 1 1 320px; }
+.col-right .panel { flex: 1 1 0; }
+
+.panel-h {
+  display: flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 14px;
+  font-size: 18px; font-weight: 700; color: #f0d8d8;
+  border-bottom: 1px solid rgba(192, 16, 42, 0.22);
+  background: linear-gradient(90deg, rgba(192, 16, 42, 0.16), transparent);
+}
+.panel-h .bar { width: 4px; height: 16px; background: var(--blood); box-shadow: 0 0 8px var(--blood); }
+.panel-b { position: relative; flex: 1 1 auto; padding: 10px 12px; overflow: hidden; }
+.chart { width: 100%; height: 100%; }
+
+/* ===== KPI ===== */
+.kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 100%; }
+.kpi {
+  position: relative; display: flex; flex-direction: column; justify-content: center;
+  padding: 8px 12px; border: 1px solid rgba(192, 16, 42, 0.25);
+  background: linear-gradient(135deg, rgba(192, 16, 42, 0.10), rgba(138, 43, 226, 0.05));
+}
+.kpi .ico { font-size: 14px; color: var(--blood); }
+.kpi .label { font-size: 13px; color: #b58a8a; margin: 2px 0; }
+.kpi .val { font-size: 26px; font-weight: 800; color: #fff; font-family: "Consolas", monospace; }
+.kpi .val .unit { font-size: 13px; color: #b58a8a; margin-left: 4px; font-weight: 400; }
+.kpi .trend { font-size: 12px; margin-top: 2px; }
+.kpi .trend.up { color: var(--toxic); }
+.kpi .trend.down { color: #ff7a7a; }
+
+/* ===== Ranking ===== */
+.rank-scroll { height: 100%; overflow: hidden; }
+.rank-track { animation: scrollUp 22s linear infinite; }
+.rank-track:hover { animation-play-state: paused; }
+@keyframes scrollUp { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+.rank-row { display: flex; align-items: center; gap: 10px; padding: 7px 4px; }
+.rank-row .no { width: 22px; height: 22px; line-height: 22px; text-align: center; font-size: 13px;
+  border-radius: 4px; background: rgba(192, 16, 42, 0.18); color: var(--blood); font-weight: 700; }
+.rank-row .no.top { background: var(--ghost); color: #fff; }
+.rank-row .city { width: 64px; font-size: 14px; color: #e7d2d2; }
+.rank-row .meter { flex: 1; height: 12px; background: rgba(255, 255, 255, 0.06); border-radius: 6px; overflow: hidden; }
+.rank-row .meter i { display: block; height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--blood2), var(--blood)); transition: width .8s ease; }
+.rank-row .num { width: 64px; text-align: right; font-size: 14px; font-family: "Consolas", monospace; color: #fff; }
+
+/* ===== Gauges ===== */
+.gauge-b { display: flex; }
+.gauge-b .half { width: 50%; height: 100%; }
+
+/* ===== Log ===== */
+.log-list { height: 100%; overflow: hidden; display: flex; flex-direction: column; gap: 6px; }
+.log-item {
+  font-size: 13px; color: #e7d2d2; padding: 6px 8px; line-height: 1.4;
+  border-left: 2px solid var(--ghost); background: rgba(138, 43, 226, 0.08);
+  animation: fadeIn .5s ease;
+}
+.log-item .t { color: #b58a8a; margin-right: 6px; font-family: "Consolas", monospace; }
+.log-item .u { color: var(--blood); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+.fallback { display: flex; align-items: center; justify-content: center; height: 100%;
+  color: #ff7a7a; font-size: 14px; text-align: center; padding: 12px; }
+
+/* ===== 血迹层（恐怖猎奇） ===== */
+.blood-layer { position: absolute; inset: 0; pointer-events: none; z-index: 60; }
+.blood-splat { position: absolute; inset: 0; width: 100%; height: 100%; }
+.handprint {
+  position: absolute;
+  left: 1180px; top: 235px; width: 540px; height: 620px;
+  transform: rotate(-7deg);
+  opacity: 0.6;
+  filter: drop-shadow(0 0 18px rgba(192, 16, 42, 0.45));
+}
+.handprint svg { width: 100%; height: 100%; display: block; }
