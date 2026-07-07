@@ -1,0 +1,27 @@
+:root {
+  --cyan: #22d3ee;
+  --blue: #3b82f6;
+  --green: #34d399;
+  --orange: #fbbf24;
+  --purple: #a78bfa;
+  --txt: #cfe8ff;
+  --panel-bg: rgba(13, 31, 71, 0.55);
+  --panel-bd: rgba(34, 211, 238, 0.28);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #04081c;
+  font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  color: var(--txt);
+}
